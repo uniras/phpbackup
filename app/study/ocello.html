@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .contents {
+            width: 500px;
+            height: 500px;
+            background-color: forestgreen;
+        }
+
+        .list {
+            display: flex;
+            align-items: center;
+            height: 500px;
+        }
+
+        table {
+            width: 90%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            border-spacing: 1px;
+        }
+
+        table tr td {
+            height: 50px;
+            border: 3px solid black;
+            width: 50px;
+            height: 50px;
+        }
+
+        .shiro-koma {
+            background-color: white;
+            border-radius: 50px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .kuro-koma {
+            background-color: black;
+            border-radius: 50px;
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+    <title>オセロ</title>
+</head>
+
+<body>
+    <div class="contents"></div>
+    <script>
+        //　初期盤面
+
+        let contents = document.querySelector('.contents');
+
+        window.onload = function banmen() {
+            let banmen = document.createElement('div');
+            let list_table = document.createElement('table');
+
+
+            banmen.classList.add('list');
+            contents.appendChild(banmen, contents);
+            banmen.appendChild(list_table, banmen);
+
+            for (let i = 0; i <= 7; i++) {
+                let list_tr = document.createElement('tr');
+                list_table.appendChild(list_tr);
+
+                for (let a = 0; a <= 7; a++) {
+                    let list_td = document.createElement('td');
+                    list_tr.appendChild(list_td);
+                    let div = document.createElement('div');
+                    div.style.height = "100%";
+                    list_td.appendChild(div);
+                }
+            }
+            haichi();
+            click();
+        }
+
+        // 初期配置
+        function haichi() {
+            let list_div = document.querySelectorAll("td div");
+            list_div[35].classList.add("shiro-koma");
+            list_div[28].classList.add("shiro-koma");
+            list_div[36].classList.add("kuro-koma");
+            list_div[27].classList.add("kuro-koma");
+        }
+
+        // クリックして自分のコマを置いた時
+        function click() {
+            let list_div = document.querySelectorAll("td div");
+            list_div.forEach(function (item) {
+                item.addEventListener("click", function () {
+                    this.classList.add("shiro-koma");
+                });
+            });
+        }
+
+        // 相手が自分のコマを置いたとき
+        function 相手がコマを置く時() {
+
+        }
+
+        // 勝敗判定
+        function 勝敗判定() {
+
+        }
+    </script>
+</body>
+
+</html>

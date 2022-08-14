@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .thumbnail {
+            width: 600px;
+            height: 400px;
+            border: 1px dashed skyblue;
+            position: relative;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .thumbnail-img {
+            position: absolute;
+            width: 600px;
+            height: 400px;
+            top: 0;
+            z-index: 2;
+        }
+
+        .delete_photo {
+            display: none;
+            z-index: 3;
+            background-color: white;
+        }
+
+        .delete_thumbnail {
+            position: relative;
+            width: 50px;
+            height: 50px;
+        }
+
+        .delete_thumbnail > span {
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateY(-50%) translateX(-50%);
+        }
+    </style>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const preview = document.getElementsByClassName('thumbnail-img')[0];
+            const fileelem = document.querySelector('input[type=file]');
+            const deletebutton = document.getElementsByClassName('delete_photo')[0];
+            const photo = document.getElementsByClassName('photo')[0];
+            preview.style.display = 'none';
+            deletebutton.addEventListener('click', (event) => {
+                preview.src = '';
+                preview.style.display = 'none';
+                deletebutton.style.display = 'none';
+                photo.style.display = 'block';
+                event.preventDefault();
+                return false;
+            });
+            fileelem.addEventListener('change', (event) => {
+                let file = fileelem.files[0];
+                let reader = new FileReader();
+                reader.addEventListener("load", function () {
+                    // 画像ファイルを base64 文字列に変換します
+                    preview.style.display = 'block';
+                    preview.src = reader.result;
+                    deletebutton.style.display = 'block';
+                    photo.style.display = 'none';
+                }, false);
+
+                if (file) {
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <label>
+        <div class="thumbnail">
+            <div class="delete_thumbnail delete_photo"><span>×</span></div>
+            <img class="thumbnail-img">
+            <span class="photo">写真追加</span>
+        </div>
+        <input type="file" name="thumbnail" hidden accept=".png, .jpeg, .jpg">
+    </label>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>テーブルのテスト</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            text-align: center;
+            width: 50px;
+            height: 20px;
+            border: solid 1px;
+        }
+
+        tr.odd {
+            background-color: blue;
+            opacity: 0.3;
+        }
+
+        tr.even {
+            background-color: yellow;
+            opacity: 0.3;
+        }
+
+        tr:hover {
+            background-color: transparent;
+        }
+
+        tr:hover {
+            background-color: transparent !important;
+        }
+    </style>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const tbody = document.getElementsByTagName('tbody')[0];
+
+            for(let i = 0; i < 10; i++) {
+                const tr = document.createElement('tr');
+                for(let j = 0; j < 10; j++) {
+                    const td = document.createElement('td');
+                    td.innerText = '　';
+                    tr.appendChild(td);
+                }
+                if(i % 2 == 0) {
+                    tr.classList.add('even');
+                }else{
+                    tr.classList.add('odd');
+                }
+                tbody.appendChild(tr);
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <table>
+        <tbody>
+        </tbody>
+    </table>
+</body>
+
+</html>

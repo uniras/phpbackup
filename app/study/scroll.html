@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スクロールテスト</title>
+    <style>
+        #logo {
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .color_1 {
+            color: #c00;
+        }
+
+        .color_2 {
+            color: #FF8E00;
+        }
+
+        .color_3 {
+            color: #F0FF00;
+        }
+
+        .color_4 {
+            color: #00FF05;
+        }
+
+        .color_5 {
+            color: #1015FF;
+        }
+
+        .color_6 {
+            color: #214A4E;
+        }
+
+        .color_7 {
+            color: #8C15FF;
+        }
+    </style>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+    <script>
+        let precolor = 0;
+        $(window).scroll(function () {
+            scroll = $(window).scrollTop();
+            color = (Math.floor(scroll / 300) % 7) + 1;
+
+            //デバッグ用
+            $('#logo').text('test:' + scroll + '(' + color + ')');
+
+            if (precolor !== color) {
+                $('#logo').removeClass().removeClass('color_' + precolor);
+                $('#logo').removeClass().addClass('color_' + color);
+                precolor = color;
+            }
+        });
+    </script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div style="height:20000px;">
+        <div id="logo" class="color_1">test</div>
+    </div>
+</body>
+
+</html>

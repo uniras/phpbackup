@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>選択テスト3</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+    <script>
+        $('.one')
+            .find('.item')
+            .on('click', function () {
+                //もしul class=".two"の孫要素.class=itemにcheckedがついていたら
+                if ($('.two').find('.item').prop('checked')) {
+                    // oneの孫要素.class=item、checkedをtrue(選択できない)に。
+                    $('.one').find('.item').prop('disabled', true);
+                } else {
+                    //それ以外は.oneの孫要素.class=itemをdisabledをfalse(選択できる)
+                    $(this).prop('disabled', false);
+                }
+            });
+
+        $(function () {
+            let ul = $('ul.one, ul.two');
+
+            //.class=itemをクリックした時
+            $('.item').on('click', function () {
+                //もし自身にcheckedがついていたら
+                if ($(this).prop('checked')) {
+                    //自身の親以外のulの子孫要素の.class=item の disabled をtrueに。
+                    ul.not($(this).closest('ul')).find('.item').prop('disabled', true);
+                } else {
+                    //それ以外は.class=itemをdisabledをfalse(選択できる)
+                    ul.not($(this).closest('ul')).find('.item').prop('disabled', false);
+                }
+            });
+        });
+        /*
+        // //ul class=".one"の孫要素.class=itemをクリックした時
+        $('.one').find('.item').on('click', function () {
+            //もしul class=".two"の孫要素.class=itemにcheckedがついていたら
+            if ($('.two').find('.item').prop('checked')) {
+                // oneの孫要素.class=item、disabledをfalseに。
+                $('.one').find('.item').prop('disabled', false);
+                //それ以外は.oneの孫要素.class=itemをtrue
+                $(this).prop('disable', true);
+            }
+        });
+
+        $(function () {
+            let ul = $('ul.one, ul.two');
+            //.class=itemをクリックした時
+            $('.item').on('click', function () {
+                //もし自身にcheckedがついていたら
+                if ($(this).prop('checked')) {
+                    //自身の親以外のulの子孫要素の.class=item の disabled をfalseに。
+                    ul.not($(this).closest('ul')).find('.item').prop('disabled', false);
+                }
+            });
+        });
+        */
+    </script>
+</head>
+
+<body>
+    <div>
+        <p>お知らせ</p>
+        <ul class="one">
+            <li>
+                <input class="item" id="info-1" name="category" type="checkbox">
+                <label for="info-1">お知らせ1</label>
+            </li>
+            <li>
+                <input class="item" id="info-2" name="category" type="checkbox">
+                <label for="info-2">お知らせ2</label>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <p>施工事例</p>
+        <ul class="two">
+            <li>
+                <input class="item" id="content-1" name="category" type="checkbox">
+                <label for="" content-1">施工事例1</label>
+            </li>
+            <li>
+                <input class="item" id="" content-2" name="category" type="checkbox">
+                <label for="" content-2">施工事例2</label>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

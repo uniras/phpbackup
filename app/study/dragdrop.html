@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    p {
+      border: solid 1px black;
+      margin: 0px;
+      width: 100px;
+      height: 100px;
+    }
+    img {
+      border: solid 1px black;
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <p id="p1" draggable="true">drag</p>
+
+  <script>
+    const doc = document.getElementById('p1')
+    doc.onmousedown = function (event) {
+      let shiftX = event.clientX - doc.getBoundingClientRect().left;
+      let shiftY = event.clientY - doc.getBoundingClientRect().top;
+
+      console.log(doc.getBoundingClientRect().top);
+
+      console.log(doc.getBoundingClientRect().left)
+      doc.style.position = 'absolute';
+      doc.style.zIndex = 1000;
+      document.body.append(doc);
+
+      moveAt(event.pageX, event.pageY);
+
+      // ボールを（pageX、pageY）座標の中心に置く
+      function moveAt(pageX, pageY) {
+        doc.style.left = pageX - shiftX + 'px';
+        doc.style.top = pageY - shiftY + 'px';
+      }
+
+      function onMouseMove(event) {
+        moveAt(event.pageX, event.pageY);
+      }
+
+      // (3) mousemove でボールを移動する
+      document.addEventListener('mousemove', onMouseMove);
+
+      // (4) ボールをドロップする。不要なハンドラを削除する
+      doc.onmouseup = function () {
+        document.removeEventListener('mousemove', onMouseMove);
+        doc.onmouseup = null;
+      };
+
+    };
+
+    doc.ondragstart = function () {
+      return false;
+    };
+  </script>
+</body>
+
+</html>

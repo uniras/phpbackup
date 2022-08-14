@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSSアニメーション</title>
+    <style>
+        .wrapper {
+            display: flex;
+            gap: 10px;
+        }
+
+        .wrapper div {
+            background-color: blue;
+            width: 50px;
+            height: 50px;
+            opacity: 0;
+        }
+
+        .box1 {
+            animation: fadeInOut1 10s infinite;
+        }
+
+        .box2 {
+            animation: fadeInOut2 10s infinite;
+        }
+
+        .box3 {
+            animation: fadeInOut3 10s infinite;
+        }
+
+        .box4 {
+            animation: fadeInOut4 10s infinite;
+        }
+
+        .box5 {
+            animation: fadeInOut5 10s infinite;
+        }
+
+        @keyframes fadeInOut1 {
+            0% {
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeInOut2 {
+            30% {
+                opacity: 0;
+            }
+
+            40% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeInOut3 {
+            10% {
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            70% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeInOut4 {
+            40% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            60% {
+                opacity: 1;
+            }
+
+            70% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeInOut5 {
+            20% {
+                opacity: 0;
+            }
+
+            30% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            60% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <div class="box3"></div>
+        <div class="box4"></div>
+        <div class="box5"></div>
+    </div>
+</body>
+
+</html>

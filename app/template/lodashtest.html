@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>lodash templateのテスト</title>
+    <style>
+        .template {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lodash@4/lodash.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+    <script>
+        const test = function () {
+            return 'world';
+        }
+
+        const add = function (a, b) {
+            return a + b;
+        }
+
+        const test2arr = ['a', 'b', 'c', 'd', 'e'];
+        const test2 = function () {/*
+            <ol>
+            <% _.forEach(users, function(user) { %>
+            <li>${user}</li>
+            <% }); %>
+            </ol>
+        */}.toString().split(/\/\*|\*\//)[1];
+
+        const replace = function(templateString) {
+
+        }
+
+        $(document).ready(function () {
+            // Use the ES template literal delimiter as an "interpolate" delimiter.
+            // Disable support by replacing the "interpolate" delimiter.
+            //var compiled = _.template('${user} ${func()}!');
+            //$('#output').html(compiled({ 'user': 'hello', 'func': test }));
+            var compiled = _.template(test2);
+            $('#output').html(compiled({ 'users': test2arr }));
+            let test3 = $('#test5').html();
+            test3 = _.unescape(test3);
+            console.log(test3);
+            //$('#output2').html(test3);
+            var compiled2 = _.template(test3);
+            console.log(test3);
+            //var output = compiled2({ 'str': 'hello', 'test': test, 'add': add, 'c': 'abc' });
+            var output = compiled2({ 'users': test2arr })
+            console.log(output);
+            $('#output3').html((output))
+        });
+    </script>
+</head>
+
+<body>
+    <div id="output"></div>
+    <div id="output2"></div>
+    <div id="output3"></div>
+    <div class="template" id="test">
+        <p>${str} ${test()}</p>
+        <p>${add(3, 5)}</p>
+        <p>${c}</p>
+    </div>
+    <div class="template" id="test2">
+        <ol>
+            <% _.forEach(users, function(user) { %>
+                <li>${user}</li>
+            <% }); %>
+        </ol>
+    </div>
+    <div class="template" id="test3">
+        <ol>
+            ${users.map(x => `<li>I'm ${x}</li>`).join('')}
+        </ol>
+    </div>
+    <div class="template" id="test5">
+        <ol>
+            <%= users.map(x => `<li>I'm ${x}</li>`).join('') %>
+        </ol>
+    </div>
+</body>
+
+</html>

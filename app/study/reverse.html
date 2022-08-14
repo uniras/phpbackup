@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //90度回転
+        //const rotate = a => a[0].map((_, c) => a.map(r => r[c])).reverse();
+        const rotate = a => a.reverse()[0].map((_, c) => a.map(r => r[c]));
+        let a = [
+            [1, 2, 3],
+            [4, 5, 6]
+        ];
+
+        console.log(a);
+        a = rotate(a);
+        console.log(a);
+    </script>
+</body>
+
+</html>

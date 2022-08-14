@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>フロートのテスト</title>
+    <style>
+        header {
+            height: 60px;
+        }
+
+        /* headerのロゴのCSS */
+        .header-logo {
+            float: left;
+            list-style: none;
+            /* ロゴ部分のボックスモデルを設定 */
+            padding: 7.711px 19.12px;
+            /* 背景色を設定 */
+            background-color: #000000;
+            /* 文字色を設定したい */
+            color: aliceblue;
+        }
+
+        .header-list {
+            float: right;
+            list-style: none;
+            /* Layout Properties */
+            top: 20px;
+            left: 1002px;
+            width: 48px;
+            height: 21px;
+            padding: 20px 30px;
+            /* UI Properties */
+            text-align: left;
+            font: normal normal normal 14px/21px Meiryo;
+            letter-spacing: 0px;
+            color: #24292E;
+            opacity: 1;
+        }
+
+        body {
+            width: 1280px;
+        }
+
+        .main-visual img {
+            /* Layout Properties */
+            top: 60px;
+            left: 0px;
+            width: 1280px;
+            height: auto;
+
+        }
+
+        .headline {
+            text-align: center;
+            /* Layout Properties */
+            /* top: 740px;
+               left: 590px;
+               width: 101px;
+               height: 48px;
+               box-align: center; */
+            /* UI Properties */
+            /* text-align: center;
+               font: normal normal bold 32px/48px Meiryo;
+               letter-spacing: 0px;
+               color: #383E45;
+               opacity: 1; */
+
+            text-decoration: underline;
+            /*下線を引く*/
+            text-decoration-color: #000000;
+            /*下線を赤色*/
+
+        }
+
+        .profile_image {
+            /* block-align: center; */
+            text-align: center;
+            margin: auto;
+            margin-bottom: 60px;
+        }
+
+        .profile_photo {
+            /* Layout Properties */
+            top: 858px;
+            left: 374px;
+            width: 100px;
+            height: 100px;
+            /* UI Properties */
+            opacity: 1;
+            border-radius: 50%;
+        }
+
+        .pf {
+            float: left;
+            margin-right: 16.2px;
+            /* box-align: center; */
+
+        }
+
+        .content {
+            float: left;
+            list-style: none;
+        }
+
+        .content img {
+            width: 263px;
+            height: 174px;
+        }
+
+        .bicycle_images h3 {
+            padding-bottom: 60px;
+        }
+
+        .bicycle_images {
+            margin-top: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <!-- 自転車のメインの写真の部分の記述 -->
+        <div class="main-visual">
+            <img src="./image/mainvisual.jpeg">
+        </div>
+        <!-- About部分の記述 -->
+        <section class="profile_image">
+            <h2 class="headline">About</h2>
+            <!-- プロフィール写真 -->
+            <div class="pf">
+                <img src="./image/about.jpeg" class="profile_photo">
+            </div>
+            <!-- 自己紹介のテキスト -->
+            <div class="pf">
+                <p>KAKERU MIYAICHI</p>
+                <p>テキストテキストテキストテキストテキストテキストテキスト<br>テキストテキストテキストテキストテキストテキストテキスト<br>テキストテキストテキストテキストテキストテキストテキスト</p>
+            </div>
+        </section>
+        <section class="bicycle_images">
+            <h2 class="headline">Bicycle</h2>
+            <ul class="contents">
+                <li class="content">
+                    <img src="./image/bicycle1.jpeg">
+                    <p>タイトルタイトル</p>
+                    <p>テキストテキストテキスト</p>
+                </li>
+                <li class="content">
+                    <img src="./image/bicycle2.jpeg">
+                    <p>タイトルタイトル</p>
+                    <p>テキストテキストテキスト</p>
+                </li>
+                <li class="content">
+                    <img src="./image/bicycle2.jpeg">
+                    <p>タイトルタイトル</p>
+                    <p>テキストテキストテキスト</p>
+                </li>
+            </ul>
+        </section>
+    </main>
+</body>
+
+</html>

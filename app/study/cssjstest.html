@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        /*とりあえずスライドショーボックスの高さを適当に設定*/
+        .slideshow {
+            height: 100px;
+            border: solid 1px;
+        }
+    </style>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+    <script>
+        $(function(){
+            let test = $('.mainImg').eq(0).css('background-image');
+            let test2 = 'url("' + location.href + '")';
+
+            //alert(test);
+            //alert(test2);
+
+            //background-image: url()を空にした場合はなぜかurl("location.href")と同じ値になる
+            if($('.mainImg').eq(0).css('background-image') === test2) {
+                $('.slideshow').eq(0).hide();
+            }
+        })
+    </script>
+</head>
+
+<body>
+    <div>スライドショー領域の上</div>
+    <div id="slideshow@@@ItemID@@@" class="slideshow">
+        <div class="mainView rectangle_img">
+            <!--テンプレートエンジンを通した結果url()の中が空になったと仮定-->
+            <div class="mainImg mainImg1 normal_img img_tool"
+                style="background-image: url();background-size: contain;background-repeat: no-repeat;background-position: 50% 50%;">
+                <a href="javascript:void(0);"></a>
+            </div>
+            <div class="mainImg normal_img img_tool"
+                style="background-image: url(@@@image2@@@);background-size: contain;background-repeat: no-repeat;background-position: 50% 50%;">
+                <a href="javascript:void(0);"></a>
+            </div>
+            <div class="mainImg normal_img img_tool"
+                style="background-image: url(@@@image3@@@);background-size: contain;background-repeat: no-repeat;background-position: 50% 50%;">
+                <a href="javascript:void(0);"></a>
+            </div>
+            <div class="mainImg normal_img img_tool"
+                style="background-image: url(@@@image4@@@);background-size: contain;background-repeat: no-repeat;background-position: 50% 50%;">
+                <a href="javascript:void(0);"></a>
+            </div>
+        </div>
+    </div>
+    <div>スライドショー領域の下</div>
+</body>
+
+</html>

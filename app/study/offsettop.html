@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        .page-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            transition: 0.5s;
+        }
+
+        .page-top_link {
+            position: relative;
+            display: block;
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            background-color: #cccccc;
+        }
+
+        .page-top_link:before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            width: 8px;
+            height: 8px;
+            border-top: 2px solid #fff;
+            border-left: 2px solid #fff;
+        }
+
+        .is-hidden {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        #main {
+            height: 5000px;
+            text-align: center;
+        }
+
+        .footer {
+            height: 100px;
+            background-color: #ff5757;
+            padding: 20px;
+            color: #fff;
+            text-align: center;
+        }
+    </style>
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@1.0.15/destyle.css" />-->
+    <title>Jquery Offset Top</title>
+</head>
+
+<body>
+    <div class="page-top">
+        <a href="#" class="page-top_link"></a>
+    </div>
+
+    <div class="container">
+        <div id="main">
+            <p>コンテンツの高さは5000</p>
+        </div>
+        <footer class="footer">
+            <p>フッター</p>
+        </footer>
+    </div>
+    <script>
+        $(function () {
+            var elem = $(".footer");
+            var banner = $(".page-top");
+            var elemO = elem.offset().top; // ページトップからの要素の高さを取得
+            var windowH = $(window).height(); // ウィンドウの高さを取得
+
+            $(window).on("scroll", function () { // スクロールした値を取得
+                var windowS = $(window).scrollTop(); // 現在の位置
+
+                if (windowS > elemO - windowH + (windowH / 2)) { // 要素が見えたら動く
+                    banner.addClass("is-hidden");
+                } else {
+                    banner.removeClass("is-hidden");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

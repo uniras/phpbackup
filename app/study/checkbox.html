@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チェックボックスの配列</title>
+    <script>
+        window.addEventListener('DOMContentLoaded', function (event) {
+            const checkbox1 = document.getElementsByName('hoge[]');
+            function checkAll() {
+                for (i = 0; i < checkbox1.length; i++) {
+                    checkbox1[i].checked = true
+                }
+            }
+            checkAll();
+        });
+    </script>
+</head>
+
+<body>
+    <form action="">
+        <input type="checkbox" name="hoge[]" value="1">チェック1
+        <input type="checkbox" name="hoge[]" value="2">チェック2
+        <input type="checkbox" name="hoge[]" value="3">チェック3
+    </form>
+</body>
+
+</html>

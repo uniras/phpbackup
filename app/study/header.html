@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        header {
+            width: 100%;
+            height: 94px;
+            position: fixed;
+            top: 0;
+            z-index: 10;
+            background-color: white;
+            box-shadow: 0px 3px 6px #00000029;
+        }
+
+        header .header-inner {
+            max-width: 1020px;
+            height: 94px;
+            margin: 0 auto;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .header-left {
+            display: inline-block;
+            width: 240px;
+        }
+
+        .header-left a {
+            height: 94px;
+            position: relative;
+        }
+
+        .header-left a p {
+            font-size: 1.5rem;
+            font-weight: bold;
+            position: absolute;
+            left: 47px;
+        }
+
+        .header-middle {
+            position: absolute;
+            left: 40.2%;
+        }
+
+        .header-middle a {
+            font-size: 1rem;
+            font-weight: bold;
+            line-height: 24px;
+            margin-right: 46px;
+        }
+
+        .header-right {
+            position: absolute;
+            right: 21px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header-inner">
+            <div class="header-left">
+                <h1>
+                    <a href="#" class="flex-row">
+                        <img class="vertical-middle" src="https://placehold.jp/45x45.png" alt="logo">
+                        <p class="vertical-middle">ユアコーディング</p>
+                    </a>
+                </h1>
+            </div>
+            <!-- .header-left -->
+            <div class="header-middle flex-row vertical-middle">
+                <a href="#FEATURES">特徴</a>
+                <a href="#PRICE">価格</a>
+                <a href="#CONTACT">お問い合わせ</a>
+            </div>
+            <!-- .header-middle -->
+            <div class="header-right vertical-middle">
+                <a class="btn" href="#CONTACT">お問い合わせ</a>
+            </div>
+            <!-- .header-right -->
+        </div>
+        <!-- .header-inner -->
+    </header>
+</body>
+
+</html>

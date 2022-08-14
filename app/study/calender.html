@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScriptカレンダー</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            border: solid 1px;
+        }
+
+        td {
+            border: solid 1px;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+        }
+
+        .sunday {
+            color: red;
+        }
+
+        .saturday {
+            color: blue
+        }
+
+        .weekday {
+            color: black;
+        }
+
+        #month {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        let tbody = null;
+        let trs = [];
+        let tds = [];
+        let mn;
+        let ya;
+        const setCalender = function (year, month) {
+            if (tbody === null) {
+                tbody = document.getElementsByTagName('tbody')[0];
+                trs = tbody.getElementsByTagName('tr');
+                for (let i = 0; i < trs.length; i++) {
+                    tds.push(trs[i].getElementsByTagName('td'));
+                }
+            }
+            document.getElementById('month').value = year + '年' + month + '月';
+
+            let date = new Date(year, month - 1, 1);
+            let term;
+            let sday = date.getDay();
+            let count = 1;
+
+            if (month === 2) {
+                term = new Date(year, 1, 29).getMonth() === 2 ? 28 : 29;
+            } else {
+                term = [4, 6, 9, 11].includes(month) ? 30 : 31;
+            }
+
+            for (let w = 1; w < 7; w++) {
+                let sd = w === 1 ? sday : 0;
+                for (let d = 0; d < 7; d++) {
+                    if (count > term || d < sd) {
+                        tds[w][d].getElementsByTagName('span')[0].innerText = '';
+                    } else {
+                        tds[w][d].getElementsByTagName('span')[0].innerText = count;
+                        count++;
+                    }
+                }
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+            document.getElementById('back').addEventListener('click', (event) => {
+                mn--;
+                if (mn < 1) {
+                    ya--;
+                    mn = 12;
+                }
+                setCalender(ya, mn);
+            });
+            document.getElementById('forward').addEventListener('click', (event) => {
+                mn++;
+                if (mn > 12) {
+                    ya++;
+                    mn = 1;
+                }
+                setCalender(ya, mn);
+            });
+            let now = new Date();
+            ya = now.getFullYear();
+            mn = now.getMonth() + 1;
+            setCalender(ya, mn);
+        });
+    </script>
+</head>
+
+<body>
+    <button id="back">＜＜</button><input id="month" type="text" value="" disabled><button id="forward">＞＞</button>
+    <table>
+        <tbody>
+            <tr>
+                <td><span class="sunday">日</span></td>
+                <td><span class="weekday">月</span></td>
+                <td><span class="weekday">火</span></td>
+                <td><span class="weekday">水</span></td>
+                <td><span class="weekday">木</span></td>
+                <td><span class="weekday">金</span></td>
+                <td><span class="saturday">土</span></td>
+            </tr>
+            <tr>
+                <td><span class="sunday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="saturday">　</span></td>
+            </tr>
+            <tr>
+                <td><span class="sunday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="saturday">　</span></td>
+            </tr>
+            <tr>
+                <td><span class="sunday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="saturday">　</span></td>
+            </tr>
+            <tr>
+                <td><span class="sunday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="saturday">　</span></td>
+            </tr>
+            <tr>
+                <td><span class="sunday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="saturday">　</span></td>
+            </tr>
+            <tr>
+                <td><span class="sunday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="weekday">　</span></td>
+                <td><span class="saturday">　</span></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

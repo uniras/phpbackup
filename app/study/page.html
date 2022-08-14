@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8" />
+
+	<title>「リストを絞り込む処理を実装してみる」のデモページ4 | cly7796.net</title>
+	<meta name="keywords" content="javascript,jQuery,絞り込み,選択,複数,デモページ4" />
+	<meta name="description" content="「リストを絞り込む処理を実装してみる」のデモページ4です。" />
+	<!-- paginating.jsのcssはbootstrap前提っぽい -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<!-- 元となるリストは常に非表示 -->
+	<style>
+		.list {
+			display: none;
+		}
+	</style>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="./paginathing.js"></script>
+	<script>
+		//参照元サイトのコードは変更する必要があるのでコードを貼り付け
+		$(function () {
+			var lists = $('.list li');
+			$('#search').on('click', function () {
+				//一旦全要素にhitクラスを付与
+				lists.addClass('hit');
+				//lists.show();
+				for (var i = 0; i < $('.serchBox select').length; i++) {
+					// 絞り込みの項目を取得
+					var item = $('.serchBox select').eq(i).attr('name');
+					// 絞り込みの対象を取得
+					var target = $('.serchBox select').eq(i).val();
+
+					if (target != '') {
+						for (var j = 0; j < lists.length; j++) {
+							// 絞り込み対象でない場合は非表示→クラス削除
+							if (!lists.eq(j).find('.' + item).find('span').hasClass(target)) {
+								//lists.eq(j).hide();
+								//条件に当てはまらなかったらhitクラスを削除
+								lists.eq(j).removeClass('hit');
+							}
+						};
+					}
+				};
+				pagination();
+			});
+
+			//ページロード直後は全体がヒットしたという形で表示
+			lists.addClass('hit');
+			pagination();
+		});
+
+		function pagination() {
+			//前回のページネーションバーがあれば削除
+			$('.pagination-container').remove();
+			//表示用要素のクリア
+			$('#result').html('');
+
+			if ($('.hit').length === 0) {
+				//.hitクラスの要素が0(該当項目なし)のばあいはメッセージを表示
+				$('.none').show();
+			} else {
+				$('.none').hide();
+
+				//.hitクラスが残った要素だけ表示用の要素にコピー
+				$('#result').html($('.hit').clone());
+
+				//ページネーション
+				$('.news-container').paginathing({//親要素のclassを記述
+					perPage: 2,//1ページあたりの表示件数　→　項目数が少ないからテスト用に1ページ2個で
+					prevText: '前へ',//1つ前のページへ移動するボタンのテキスト
+					nextText: '次へ',//1つ次のページへ移動するボタンのテキスト
+					activeClass: 'navi-active',//現在のページ番号に任意のclassを付与できます
+				});
+			}
+		}
+	</script>
+
+
+</head>
+
+<body>
+	<div id="page">
+		<div class="serchBox">
+			<select name="type">
+				<option value="">種類を選択</option>
+				<option value="mammals">哺乳類</option>
+				<option value="reptiles">爬虫類</option>
+				<option value="birds">鳥類</option>
+				<option value="other">その他</option>
+			</select>
+			<select name="live">
+				<option value="">生活を選択</option>
+				<option value="water">水中</option>
+				<option value="land">陸上</option>
+				<option value="water-and-land">水中と陸上</option>
+				<option value="sky">空</option>
+			</select>
+			<select name="color">
+				<option value="">色を選択</option>
+				<option value="black">黒系</option>
+				<option value="white">白系</option>
+				<option value="green">緑系</option>
+				<option value="brown">茶系</option>
+			</select>
+			<select name="size">
+				<option value="">大きさを選択</option>
+				<option value="small">小さい</option>
+				<option value="middle">中くらい</option>
+				<option value="large">大きい</option>
+			</select>
+			<select name="name">
+				<option value="">名前を選択</option>
+				<option value="dog">イヌ</option>
+				<option value="cat">ネコ</option>
+				<option value="monkey">サル</option>
+				<option value="dolphin">イルカ</option>
+				<option value="jellyfish">クラゲ</option>
+				<option value="penguin">ペンギン</option>
+				<option value="turtle">カメ</option>
+				<option value="redstart">ジョウビタキ</option>
+				<option value="myna">九官鳥</option>
+				<option value="butterfly">蝶</option>
+				<option value="crocodile">ワニ</option>
+			</select>
+			<button id="search">検索</button>
+			<!-- <span id="count"></span>件 -->
+			<button id="reset">リセット</button>
+		</div>
+
+		<!-- 表示用の要素を追加 -->
+		<ul class="news-container" id="result">
+		</ul>
+
+		<p class="none">該当する項目がありません。</p>
+
+		<!-- 元となるリストは常に非表示 -->
+		<ul class="list">
+			<li>
+				<img src="01.jpg" width="240" height="155">
+				<p class="name">名前:<span class="dolphin">イルカ</span></p>
+				<p class="type">種類:<span class="mammals">哺乳類</span></p>
+				<p class="live">生活:<span class="water">水中</span></p>
+				<p class="color">色:<span class="black">黒系</span></p>
+				<p class="size">大きさ:<span class="large">大きい</span></p>
+			</li>
+			<li>
+				<img src="02.jpg" width="240" height="155">
+				<p class="name">名前:<span class="jellyfish">クラゲ</span></p>
+				<p class="type">種類:<span class="other">その他</span></p>
+				<p class="live">生活:<span class="water">水中</span></p>
+				<p class="color">色:<span class="white">白系</span></p>
+				<p class="size">大きさ:<span class="small">小さい</span></p>
+			</li>
+			<li>
+				<img src="03.jpg" width="240" height="155">
+				<p class="name">名前:<span class="penguin">ペンギン</span></p>
+				<p class="type">種類:<span class="birds">鳥類</span></p>
+				<p class="live">生活:<span class="water-and-land">水中と陸上</span></p>
+				<p class="color">色:<span class="black">黒系</span></p>
+				<p class="size">大きさ:<span class="middle">中くらい</span></p>
+			</li>
+			<li>
+				<img src="04.jpg" width="240" height="155">
+				<p class="name">名前:<span class="turtle">カメ</span></p>
+				<p class="type">種類:<span class="reptiles">爬虫類</span></p>
+				<p class="live">生活:<span class="water-and-land">水中と陸上</span></p>
+				<p class="color">色:<span class="green">緑系</span></p>
+				<p class="size">大きさ:<span class="small">小さい</span></p>
+			</li>
+			<li>
+				<img src="05.jpg" width="240" height="155">
+				<p class="name">名前:<span class="redstart">ジョウビタキ</span></p>
+				<p class="type">種類:<span class="birds">鳥類</span></p>
+				<p class="live">生活:<span class="sky">空</span></p>
+				<p class="color">色:<span class="brown">茶系</span></p>
+				<p class="size">大きさ:<span class="small">小さい</span></p>
+			</li>
+			<li>
+				<img src="06.jpg" width="240" height="155">
+				<p class="name">名前:<span class="cat">ネコ</span></p>
+				<p class="type">種類:<span class="mammals">哺乳類</span></p>
+				<p class="live">生活:<span class="land">陸上</span></p>
+				<p class="color">色:<span class="brown">茶系</span></p>
+				<p class="size">大きさ:<span class="middle">中くらい</span></p>
+			</li>
+			<li>
+				<img src="07.jpg" width="240" height="155">
+				<p class="name">名前:<span class="butterfly">蝶</span></p>
+				<p class="type">種類:<span class="other">その他</span></p>
+				<p class="live">生活:<span class="sky">空</span></p>
+				<p class="color">色:<span class="black">黒系</span></p>
+				<p class="size">大きさ:<span class="small">小さい</span></p>
+			</li>
+			<li>
+				<img src="08.jpg" width="240" height="155">
+				<p class="name">名前:<span class="cat">ネコ</span></p>
+				<p class="type">種類:<span class="mammals">哺乳類</span></p>
+				<p class="live">生活:<span class="land">陸上</span></p>
+				<p class="color">色:<span class="black">黒系</span></p>
+				<p class="size">大きさ:<span class="middle">中くらい</span></p>
+			</li>
+			<li>
+				<img src="09.jpg" width="240" height="155">
+				<p class="name">名前:<span class="dog">イヌ</span></p>
+				<p class="type">種類:<span class="mammals">哺乳類</span></p>
+				<p class="live">生活:<span class="land">陸上</span></p>
+				<p class="color">色:<span class="black">黒系</span></p>
+				<p class="size">大きさ:<span class="middle">中くらい</span></p>
+			</li>
+			<li>
+				<img src="10.jpg" width="240" height="155">
+				<p class="name">名前:<span class="crocodile">ワニ</span></p>
+				<p class="type">種類:<span class="reptiles">爬虫類</span></p>
+				<p class="live">生活:<span class="water-and-land">水中と陸上</span></p>
+				<p class="color">色:<span class="green">緑系</span></p>
+				<p class="size">大きさ:<span class="large">大きい</span></p>
+			</li>
+			<li>
+				<img src="11.jpg" width="240" height="155">
+				<p class="name">名前:<span class="monkey">サル</span></p>
+				<p class="type">種類:<span class="mammals">哺乳類</span></p>
+				<p class="live">生活:<span class="land">陸上</span></p>
+				<p class="color">色:<span class="brown">茶系</span></p>
+				<p class="size">大きさ:<span class="middle">中くらい</span></p>
+			</li>
+			<li>
+				<img src="12.jpg" width="240" height="155">
+				<p class="name">名前:<span class="myna">九官鳥</span></p>
+				<p class="type">種類:<span class="birds">鳥類</span></p>
+				<p class="live">生活:<span class="sky">空</span></p>
+				<p class="color">色:<span class="black">黒系</span></p>
+				<p class="size">大きさ:<span class="small">小さい</span></p>
+			</li>
+			<li>
+				<img src="13.jpg" width="240" height="155">
+				<p class="name">名前:<span class="dog">イヌ</span></p>
+				<p class="type">種類:<span class="mammals">哺乳類</span></p>
+				<p class="live">生活:<span class="land">陸上</span></p>
+				<p class="color">色:<span class="white">白系</span></p>
+				<p class="size">大きさ:<span class="middle">中くらい</span></p>
+			</li>
+			<li>
+				<img src="14.jpg" width="240" height="155">
+				<p class="name">名前:<span class="dog">イヌ</span></p>
+				<p class="type">種類:<span class="mammals">哺乳類</span></p>
+				<p class="live">生活:<span class="land">陸上</span></p>
+				<p class="color">色:<span class="brown">茶系</span></p>
+				<p class="size">大きさ:<span class="middle">中くらい</span></p>
+			</li>
+		</ul>
+	</div>
+
+</body>
+
+</html>

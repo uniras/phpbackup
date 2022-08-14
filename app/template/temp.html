@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>テンプレートリテラルのテスト</title>
+    <style>
+        .template {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+    <script>
+        const str = 'hello';
+        const test = function () {
+            return 'world';
+        }
+
+        const add = function (a, b) {
+            return a + b;
+        }
+
+        //テンプレートリテラルでコンパイル時展開
+        const temp = `
+                <div>
+                    <p>${str} ${test()}</p>
+                    <p>${add(3, 5)}</p>
+                </div>
+            `;
+
+        //裏技的ヒアドキュメント
+        const temp2 = function () {/*
+                <div>
+                    <p>${str} ${test()}</p>
+                    <p>${add(3, 5)}</p>
+                    <p>${this.c}</p>
+                </div>
+        */}.toString().split(/\/\*|\*\//)[1];
+
+        //テンプレートを値付きで展開
+        const fillTemplateold = function (templateString, templateVars) {
+            return new Function("return `" + templateString + "`;").call(templateVars);
+        }
+
+        const fillTemplate = function (templateString, templateVars) {
+            var func = new Function(...Object.keys(templateVars), "return `" + templateString + "`;")
+            return func(...Object.values(templateVars));
+        }
+
+        var unescapeHtml = function (target) {
+            if (typeof target !== 'string') return target;
+
+            var patterns = {
+                '&lt;': '<',
+                '&gt;': '>',
+                '&amp;': '&',
+                '&quot;': '"',
+                '&#x27;': '\'',
+                '&#x60;': '`'
+            };
+
+            return target.replace(/&(lt|gt|amp|quot|#x27|#x60);/g, function (match) {
+                return patterns[match];
+            });
+        };
+
+        $(document).ready(function () {
+            const testarr = ['a', 'b', 'c', 'd', 'e'];
+            //const coutput = `${testarr.map(x => `<li>I'm ${x}</li>`).join('')}`;
+            //let test = $('#test3').html();
+            //test = unescapeHtml(test);
+            //console.log(test);
+            //let output = new Function("return `" + test + "`;")
+            //console.log(output);
+            //console.log(output.call(testarr));
+            //$('#output').html(temp);
+            //$('#output2').html($('#test').html());
+
+            let test = $('#test3').html();
+            console.log(test);
+            test = unescapeHtml(test);
+            console.log(test);
+            let output = fillTemplate(test, { 'users': testarr });
+            console.log(output);
+            $('#output').html(output);
+        });
+
+        //$(users).each(x => { })   → ${users.map(x => ``).join('')}   <%= users.map(x => ``).join('') %>
+        //$(users).if({ }:{ })    　→　${users ? `` : ``}              <%= users ? `` : `` %>
+        
+    </script>
+</head>
+
+<body>
+    <div id="output"></div>
+    <div id="output2"></div>
+    <div id="output3"></div>
+    <!-- HTMLにテンプレート直で埋め込み！？ -->
+    <div id="template" id="test">
+        <div>
+            <p>${str} ${test()}</p>
+            <p>${add(3, 5)}</p>
+            <p>${this.c}</p>
+        </div>
+    </div>
+    <div class="template" id="test3">
+        <ol>
+            ${users.map(x => `<li>I'm ${x}</li>`).join('')}
+        </ol>
+    </div>
+</body>
+
+</html>

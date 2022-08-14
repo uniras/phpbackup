@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MinMax</title>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            var maxelem = document.getElementsByName('max')[0];
+            var minelem = document.getElementsByName('min')[0];
+            var maxinput = minelem.max;
+            var mininput = minelem.min;
+
+            maxelem.addEventListener('change', (event) => {
+                var maxval = parseInt(maxelem.value);
+                var minval = parseInt(minelem.value);
+                if (maxval > maxinput) maxelem.value = maxinput;
+                if (maxval < mininput) maxelem.value = mininput;
+                if (minval > maxval) maxelem.value = minval;
+            });
+
+            minelem.addEventListener('change', (event) => {
+                var maxval = parseInt(maxelem.value);
+                var minval = parseInt(minelem.value);
+                if (minval > maxinput) minelem.value = maxinput;
+                if (minval < mininput) minelem.value = mininput;
+                minval = parseInt(minelem.value);
+                if (minval > maxval) maxelem.value = minval;
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <p>min</p><input type="number" class="form-control" placeholder="min score" name="min" value="0" min="0" max="10">
+    <p>max</p><input type="number" class="form-control" placeholder="max score" name="max" value="0" min="0" max="10">
+</body>
+
+</html>

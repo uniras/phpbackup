@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Stikcy or change header and navigation when scrolling using jQuery #1</title>
+    <style>
+        /* page style */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            position: relative;
+            height: 200px;
+            background: #3498db;
+        }
+
+        h1 {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            color: #fff;
+            font-size: 2em;
+            text-align: center;
+            transform: translateY(-50%);
+        }
+
+        nav {
+            height: 100px;
+            background: #f1c40f;
+        }
+
+        main {
+            padding: 120px 20px;
+            background: #ecf0f1;
+        }
+
+        section {
+            max-width: 960px;
+            height: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            box-shadow: 0 0 30px rgba(0, 0, 0, .1);
+        }
+
+        section+section {
+            margin-top: 120px;
+        }
+
+        footer {
+            height: 200px;
+            background: #2c3e50;
+        }
+
+
+        @media screen and (max-width:768px) {
+
+            /* demo style */
+            .is-fixed {
+                z-index: 2;
+                width: 100%;
+            }
+
+        }
+
+        @media screen and (min-width:768px) {
+
+            /* demo style */
+            .is-fixed {
+                position: sticky;
+                top: 0;
+                left: 0;
+                z-index: 2;
+                width: 100%;
+            }
+        }
+    </style>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+    <script>
+        $(function () {
+            /*
+            var $win = $(window),
+                $main = $('main'),
+                $nav = $('nav'),
+                navHeight = $nav.outerHeight(),
+                navPos = $nav.offset().top,
+                fixedClass = 'is-fixed';
+
+            $win.on('load scroll', function () {
+                var value = $(this).scrollTop();
+                if (value > navPos) {
+                    $nav.addClass(fixedClass);
+                    $main.css('margin-top', navHeight);
+                } else {
+                    $nav.removeClass(fixedClass);
+                    $main.css('margin-top', '0');
+                }
+            });
+            */
+            $(function () {
+                var $win = $(window),
+                    $nav = $('.global-nav'),
+                    navPos = $nav.offset().top,
+                    fixedClass = 'is-fixed';
+
+                $win.on('load scroll', function () {
+                    var value = $(this).scrollTop();
+                    if (value > navPos) {
+                        $nav.addClass(fixedClass);
+                    } else {
+                        $nav.removeClass(fixedClass);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>ナビゲーションが途中から固定(スマホでは無効)</h1>
+    </header>
+
+    <nav class="global-nav">あああ</nav>
+
+    <main>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+    </main>
+
+    <footer></footer>
+</body>
+
+</html>
